@@ -5,41 +5,47 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TIL-note</title>
+  <title>looback-note</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <main class="memo">
-    <section class="memo-form">
-      <h2>
+  <main>
+    <section class="memo">
+      <h2 class="memo-title">
         <span class="month">04</span>-<span class="day">19</span>
         돌아보기
       </h2>
-      <form>
+      <form class="memo-form">
         <!-- <fieldset>
           <label for="good">잘한점</label>
-          <input id="good" type="text">
-          <button>+</button>
+          <div class="memo-input">
+            <textarea id="good" cols="37" rows="3"></textarea>
+            <button class="btn-add">+</button>
+          </div>
         </fieldset>
         <fieldset>
           <label for="improve">개선점</label>
-          <input id="improve" type="text">
-          <button>+</button>
+          <div class="memo-input">
+            <textarea id="improve" cols="37" rows="3"></textarea>
+            <button class="btn-add">+</button>
+          </div>
         </fieldset> -->
         <fieldset>
           <label for="learn">배운점</label>
-          <div class="input">
-            <textarea id="learn" cols="40" rows="5"></textarea>
-            <button type="button" class="add">+</button>
+          <div class="memo-input">
+            <textarea id="learn" cols="37" rows="3"></textarea>
+            <button type="button" class="btn-add">+</button>
           </div>
         </fieldset>
-        <button>완료</button>
+        <button class="btn-submit">작성하기</button>
       </form>
     </section>
-    <section class="display"></section>
+    <section class="display">
+      <!-- <article></article> -->
+    </section>
   </main>
   <!-- JavaScript -->
   <script src="script.js"></script>

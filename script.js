@@ -2,26 +2,56 @@ let memoList = JSON.parse(localStorage.getItem('memoList'))
 memoList = memoList ?? []
 
 
-const add = document.querySelector('.btn-add')
-const memoInput = document.querySelector('.memo-input')
-const submit = document.querySelector('btn-submit')
+const btnAdd = document.querySelector('.btn-add')
+const btnSubmit = document.querySelector('.btn-submit')
+const btnConfirm = document.querySelector('.btn-confirm')
 
 const addMemo = () => {
   const learn = document.getElementById('learn').value
-  memoList.push({ learn })
+  if (learn) {
+    memoList.push({ learn })
+  }
   localStorage.setItem('memoList', JSON.stringify(memoList))
 }
-add.addEventListener('click', addMemo)
+
+const resetInput = () => {
+  document.getElementById('learn').value = ""
+}
+
+btnConfirm.addEventListener('click', addMemo)
+btnConfirm.addEventListener('click', resetInput)
+
 // add.addEventListener('click', () => {
-//   memoInput.classList.remove('hidden')
+  // const memoInput = document.querySelector('.memo-input')
+  //   memoInput.classList.remove('hidden')
 
 //   if (!memoInput.classList.contains('hidden')) {
     
 //   }
 // })
 
-
 const renderMemo = () => {
+  const memoDisplay = document.querySelector('.memo-display')
+  memoDisplay.innerHTML = ''
+  for (const memo of memoList) {
+    const item = document.createElement('div')
+    const content = document.createElement('p')
+    const btnDelete = document.createElement('button')
+    content.textContent = memo.learn
+    btnDelete.textContent = '삭제'
+    item.appendChild(content)
+    item.appendChild(btnDelete)
+    item.classList.add('flex')
+    content.classList.add('word-break')
+    memoDisplay.appendChild(item)
+  }
+}
+
+renderMemo()
+btnConfirm.addEventListener('click', renderMemo)
+// btnAdd.addEventListener('click', renderMemo)
+
+const renderMemoList = () => {
   const display = document.querySelector('.display')
   const article = document.createElement('article')
   const item = document.createElement('div')
@@ -38,13 +68,12 @@ const renderMemo = () => {
     title.textContent = '배운점'
     
     content.textContent = memo.learn
-    
+    content.classList.add('word-break')
     item.appendChild(content)
-    console.log(memo)
   }
 
 }
 
-renderMemo()
-submit.addEventListener('click', addMemo)
-submit.addEventListener('click', renderMemo)
+renderMemoList()
+btnSubmit.addEventListener('click', addMemo)
+btnSubmit.addEventListener('click', renderMemoList)

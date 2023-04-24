@@ -24,23 +24,23 @@ add.addEventListener('click', addMemo)
 const renderMemo = () => {
   const display = document.querySelector('.display')
   const article = document.createElement('article')
-  const div = document.createElement('div')
+  const item = document.createElement('div')
   const title = document.createElement('h2')
   display.appendChild(article)
-  article.appendChild(div)
-  div.appendChild(title)
+  article.appendChild(item)
+  item.appendChild(title)
   
-  for (const item of memoList) {
+  for (const memo of memoList) {
     const content = document.createElement('p')
     article.classList.add('display-list')
-    div.classList.add('display-item')
+    item.classList.add('display-item')
     title.classList.add('display-title')
     title.textContent = '배운점'
     
-    content.textContent = item.learn
+    content.textContent = memo.learn
     
-    div.appendChild(content)
-    console.log(item)
+    item.appendChild(content)
+    console.log(memo)
   }
 
 }

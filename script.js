@@ -30,7 +30,14 @@ const resetInput = () => {
 btnConfirm.addEventListener('click', addMemo)
 btnConfirm.addEventListener('click', resetInput)
 
-
+btnAdd.addEventListener('click', () => {
+  const inputArea = document.querySelector('.input-area')
+  inputArea.classList.remove('hidden')
+})
+btnConfirm.addEventListener('click', () => {
+  const inputArea = document.querySelector('.input-area')
+  inputArea.classList.add('hidden')
+})
 
 const renderMemo = () => {
   const memoDisplay = document.querySelector('.memo-display')

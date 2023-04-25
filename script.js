@@ -6,6 +6,15 @@ const btnAdd = document.querySelector('.btn-add')
 const btnSubmit = document.querySelector('.btn-submit')
 const btnConfirm = document.querySelector('.btn-confirm')
 
+const getToday = () => {
+  const month = document.querySelector('.month')
+  const day = document.querySelector('.day')
+  let date = new Date()
+  month.textContent =  date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+  day.textContent = date.getDate()
+}
+getToday()
+
 const addMemo = () => {
   const learn = document.getElementById('learn').value
   if (learn) {
@@ -21,14 +30,7 @@ const resetInput = () => {
 btnConfirm.addEventListener('click', addMemo)
 btnConfirm.addEventListener('click', resetInput)
 
-// add.addEventListener('click', () => {
-  // const memoInput = document.querySelector('.memo-input')
-  //   memoInput.classList.remove('hidden')
 
-//   if (!memoInput.classList.contains('hidden')) {
-    
-//   }
-// })
 
 const renderMemo = () => {
   const memoDisplay = document.querySelector('.memo-display')

@@ -21,7 +21,7 @@ function addMemo() {
     memoList.push({ title, learn, date: `${today.month}-${today.day}`, len: memoList.length})
   }
   localStorage.setItem('memoList', JSON.stringify(memoList))
-  renderMemo()
+  renderMemoList()
 }
 
 function resetInput() {
@@ -32,40 +32,9 @@ function resetInput() {
 btnSubmit.addEventListener('click', addMemo)
 btnSubmit.addEventListener('click', resetInput)
 
-
-
-
-function renderMemo() {
-  const memoDisplay = document.querySelector('.memo-display')
-  memoDisplay.innerHTML = ''
-  
-  for (const memo of memoList) {
-    const item = document.createElement('div')
-    const content = document.createElement('p')
-    const btnDelete = document.createElement('button')
-
-    content.textContent = memo.learn
-    btnDelete.textContent = '삭제'
-    btnDelete.setAttribute('id', memo.len)
-    console.log(btnDelete)
-    // btnDelete.setAttribute('onclick', removeMemo())
-
-    item.appendChild(title)
-    item.appendChild(content)
-    item.appendChild(btnDelete)
-    item.classList.add('flex')
-    content.classList.add('word-break')
-    memoDisplay.appendChild(item)
-  }
-}
-
-btnSubmit.addEventListener('click', renderMemo)
-
 function renderMemoList() {
-  const memoDisplay = document.querySelector('.memo-display')
-  memoDisplay.innerHTML = ''
   const display = document.querySelector('.display')
-  
+  display.innerHTML = ''
 
   for (const memo of memoList) {
     const article = document.createElement('article')
@@ -73,9 +42,15 @@ function renderMemoList() {
     const title = document.createElement('h2')
     const content = document.createElement('p')
     const date = document.createElement('p')
-    display.appendChild(article)
-    article.appendChild(item)
-    item.appendChild(title)
+    const btnDelete = document.createElement('button')
+
+    content.textContent = memo.learn
+    btnDelete.textContent = '삭제'
+    btnDelete.setAttribute('id', memo.len)
+    btnDelete.setAttribute('onclick', 'removeMemo()')
+    
+    
+
     article.classList.add('display-list')
     item.classList.add('display-item')
     title.classList.add('display-title')
@@ -85,10 +60,15 @@ function renderMemoList() {
     content.textContent = memo.learn
     content.classList.add('word-break')
     date.classList.add('display-date')
+    btnDelete.classList.add('display-delete')
+
+    display.appendChild(article)
+    article.appendChild(item)
+    item.appendChild(title)
+    item.appendChild(btnDelete)
     item.appendChild(content)
     item.appendChild(date)
   }
-
 }
 
 renderMemoList()
@@ -96,3 +76,11 @@ renderMemoList()
 btnSubmit.addEventListener('click', addMemo)
 btnSubmit.addEventListener('click', renderMemoList)
 
+function removeMemo() {
+  const idx = memoList.find(item => item.len == event.target.id)
+  if (idx) {
+    memoList.splice(memoList.findIndex((item) => item.len == idx.len), 1)
+  }
+  localStorage.setItem('memoList', JSON.stringify(memoList))
+  renderMemoList()
+}

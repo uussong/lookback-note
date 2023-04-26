@@ -67,9 +67,11 @@ main{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  width: 500px;
   border: 2px solid #FFB69F;
   border-radius: 10px;
   padding: 10px;
+  margin: 20px auto;
 }
 
 .memo-title {
@@ -161,4 +163,10 @@ main{
   bottom: 10px;
   font-size: 14px;
   margin: 5px 0;
+}
+
+.display-delete {
+  position: absolute;
+  top: 15px;
+  right: 10px;
 }

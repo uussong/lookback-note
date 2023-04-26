@@ -13,51 +13,29 @@
 
 <body>
   <main>
-    <section class="memo">
-      <h2 class="memo-title">
-        <span class="month"></span>-<span class="day"></span>
-        돌아보기
-      </h2>
-      <form class="memo-form">
-        <!-- <fieldset>
-          <label for="good">잘한점</label>
-          <div class="memo-input">
-            <textarea id="good"  rows="3"></textarea>
-            <button class="btn-add">+</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <label for="improve">개선점</label>
-          <div class="memo-input">
-            <textarea id="improve"  rows="3"></textarea>
-            <button class="btn-add">+</button>
-          </div>
-        </fieldset> -->
-        <fieldset>
-          <div class="memo-add">
-            <label for="learn">배운점</label>
-            <button type="button" class="btn-add">+</button>
-          </div>
-          <div class="memo-display">
-
-          </div>
-          <div class="input-area hidden">
-            <textarea id="learn" rows="2" class="memo-input"></textarea>
-            <button type="button" class="btn-confirm">확인</button>
-          </div>
-        </fieldset>
-        <button class="btn-submit">작성 완료</button>
-      </form>
-    </section>
     <section class="display">
-      <!-- <article class="display-list">
-        <div class="display-item">
-          <h2 class="display-title">배운점</h2>
-          <p class="display-element">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque, repellendus!</p>
-          <p class="display-element">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque, repellendus!</p>
-          <p class="display-element">배운점은</p>
-        </div>
-      </article> -->
+      <div class="memo">
+        <h2 class="memo-title">
+          <span class="month"></span>-<span class="day"></span>
+          돌아보기
+        </h2>
+        <form class="memo-form">
+          <fieldset>
+            <div class="memo-add">
+              <label for="title" class="a11y-hidden">제목 입력창</label>
+              <input type="text" id="title" class="memo-input">
+            </div>
+            <div class="memo-display">
+
+            </div>
+            <div class="input-area">
+              <label for="learn" class="a11y-hidden">본문 입력창</label>
+              <textarea id="learn" rows="5" class="memo-input"></textarea>
+            </div>
+          </fieldset>
+          <button class="btn-submit">작성 완료</button>
+        </form>
+      </div>
     </section>
   </main>
   <!-- JavaScript -->

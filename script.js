@@ -1,53 +1,56 @@
 let memoList = JSON.parse(localStorage.getItem('memoList'))
 memoList = memoList ?? []
 
-
-const btnAdd = document.querySelector('.btn-add')
 const btnSubmit = document.querySelector('.btn-submit')
-const btnConfirm = document.querySelector('.btn-confirm')
 
-const getToday = () => {
-  const month = document.querySelector('.month')
-  const day = document.querySelector('.day')
-  let date = new Date()
-  month.textContent =  date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-  day.textContent = date.getDate()
+const month = document.querySelector('.month')
+const day = document.querySelector('.day')
+let date = new Date()
+today = {
+  month: date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1,
+  day: date.getDate(),
 }
-getToday()
+month.textContent = today.month
+day.textContent = today.day
 
-const addMemo = () => {
+
+function addMemo() {
+  const title = document.getElementById('title').value
   const learn = document.getElementById('learn').value
   if (learn) {
-    memoList.push({ learn })
+    memoList.push({ title, learn, date: `${today.month}-${today.day}`, len: memoList.length})
   }
   localStorage.setItem('memoList', JSON.stringify(memoList))
+  renderMemo()
 }
 
-const resetInput = () => {
-  document.getElementById('learn').value = ""
+function resetInput() {
+  document.getElementById('title').value = ''
+  document.getElementById('learn').value = ''
 }
 
-btnConfirm.addEventListener('click', addMemo)
-btnConfirm.addEventListener('click', resetInput)
+btnSubmit.addEventListener('click', addMemo)
+btnSubmit.addEventListener('click', resetInput)
 
-btnAdd.addEventListener('click', () => {
-  const inputArea = document.querySelector('.input-area')
-  inputArea.classList.remove('hidden')
-})
-btnConfirm.addEventListener('click', () => {
-  const inputArea = document.querySelector('.input-area')
-  inputArea.classList.add('hidden')
-})
 
-const renderMemo = () => {
+
+
+function renderMemo() {
   const memoDisplay = document.querySelector('.memo-display')
   memoDisplay.innerHTML = ''
+  
   for (const memo of memoList) {
     const item = document.createElement('div')
     const content = document.createElement('p')
     const btnDelete = document.createElement('button')
+
     content.textContent = memo.learn
     btnDelete.textContent = '삭제'
+    btnDelete.setAttribute('id', memo.len)
+    console.log(btnDelete)
+    // btnDelete.setAttribute('onclick', removeMemo())
+
+    item.appendChild(title)
     item.appendChild(content)
     item.appendChild(btnDelete)
     item.classList.add('flex')
@@ -56,33 +59,40 @@ const renderMemo = () => {
   }
 }
 
-renderMemo()
-btnConfirm.addEventListener('click', renderMemo)
-// btnAdd.addEventListener('click', renderMemo)
+btnSubmit.addEventListener('click', renderMemo)
 
-const renderMemoList = () => {
+function renderMemoList() {
+  const memoDisplay = document.querySelector('.memo-display')
+  memoDisplay.innerHTML = ''
   const display = document.querySelector('.display')
-  const article = document.createElement('article')
-  const item = document.createElement('div')
-  const title = document.createElement('h2')
-  display.appendChild(article)
-  article.appendChild(item)
-  item.appendChild(title)
   
+
   for (const memo of memoList) {
+    const article = document.createElement('article')
+    const item = document.createElement('div')
+    const title = document.createElement('h2')
     const content = document.createElement('p')
+    const date = document.createElement('p')
+    display.appendChild(article)
+    article.appendChild(item)
+    item.appendChild(title)
     article.classList.add('display-list')
     item.classList.add('display-item')
     title.classList.add('display-title')
-    title.textContent = '배운점'
+    title.textContent = memo.title
+    date.textContent = memo.date
     
     content.textContent = memo.learn
     content.classList.add('word-break')
+    date.classList.add('display-date')
     item.appendChild(content)
+    item.appendChild(date)
   }
 
 }
 
 renderMemoList()
+
 btnSubmit.addEventListener('click', addMemo)
 btnSubmit.addEventListener('click', renderMemoList)
+
